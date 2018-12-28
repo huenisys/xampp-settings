@@ -16,11 +16,11 @@ $i = 0;
 $i++;
 
 /* Authentication type and info */
-$cfg['Servers'][$i]['auth_type'] = 'config';
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
 $cfg['Servers'][$i]['user'] = 'root';
 $cfg['Servers'][$i]['password'] = 'secret';
 $cfg['Servers'][$i]['extension'] = 'mysqli';
-$cfg['Servers'][$i]['AllowNoPassword'] = true;
+$cfg['Servers'][$i]['AllowNoPassword'] = false;
 $cfg['Lang'] = '';
 
 /* Bind to the localhost ipv4 address and tcp */
