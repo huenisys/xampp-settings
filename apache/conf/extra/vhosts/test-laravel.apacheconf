@@ -1,1 +1,29 @@
-E:/sites/huenisys/bloom/stubs/server/xampp/test-laravel.apacheconf
+<VirtualHost *:80>
+    DocumentRoot "E:/sites/test-laravel/public"
+    ServerName test-laravel.local
+	SetEnv APP_ENV local
+	SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/test-laravel.local-error.log"
+    CustomLog "logs/test-laravel-access.log" common
+    <Directory "E:/sites/test-laravel/public">
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+    DocumentRoot "E:/sites/test-laravel/public"
+    ServerName test-laravel.local
+	SetEnv APP_ENV local
+	SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/test-laravel-https-error.log"
+    CustomLog "logs/test-laravel-https-access.log" common
+    SSLEngine on
+    SSLCertificateFile "conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "conf/ssl.key/server.key"
+    <Directory "E:/sites/test-laravel/public">
+        Options All
+    	AllowOverride All
+    	Require all granted
+    </Directory>
+</VirtualHost>

@@ -1,0 +1,30 @@
+<VirtualHost *:80>
+    DocumentRoot "E:/sites/huenits/public"
+    ServerName huenits.local
+    Redirect / https://huenits.local/
+  SetEnv APP_ENV local
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/huenits.local-error.log"
+    CustomLog "logs/huenits-access.log" common
+    <Directory "E:/sites/huenits/public">
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+    DocumentRoot "E:/sites/huenits/public"
+    ServerName huenits.local
+  SetEnv APP_ENV local
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/huenits-https-error.log"
+    CustomLog "logs/huenits-https-access.log" common
+    SSLEngine on
+    SSLCertificateFile "conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "conf/ssl.key/server.key"
+    <Directory "E:/sites/huenits/public">
+        Options All
+      AllowOverride All
+      Require all granted
+    </Directory>
+</VirtualHost>

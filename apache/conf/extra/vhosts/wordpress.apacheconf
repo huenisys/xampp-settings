@@ -1,0 +1,29 @@
+<VirtualHost *:80>
+    DocumentRoot "E:/sites/wordpress"
+    ServerName wordpress.local
+	SetEnv APP_ENV local
+	SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/wordpress.local-error.log"
+    CustomLog "logs/wordpress-access.log" common
+    <Directory "E:/sites/wordpress/public">
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+    DocumentRoot "E:/sites/wordpress/public"
+    ServerName wordpress.local
+	SetEnv APP_ENV local
+	SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/wordpress-https-error.log"
+    CustomLog "logs/wordpress-https-access.log" common
+    SSLEngine on
+    SSLCertificateFile "conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "conf/ssl.key/server.key"
+    <Directory "E:/sites/wordpress/public">
+        Options All
+    	AllowOverride All
+    	Require all granted
+    </Directory>
+</VirtualHost>
