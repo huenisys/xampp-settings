@@ -1,0 +1,63 @@
+<VirtualHost *:80>
+    DocumentRoot "E:/sites/harbielend/public"
+    ServerName harbielend.local
+    # Redirect / https://harbielend.local/
+  SetEnv APP_ENV local
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/harbielend.local-error.log"
+    CustomLog "logs/harbielend.local-access.log" common
+    <Directory "E:/sites/harbielend/public">
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+    DocumentRoot "E:/sites/harbielend/public"
+    ServerName harbielend.local
+  SetEnv APP_ENV local
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/harbielend.local-https-error.log"
+    CustomLog "logs/harbielend.local-https-access.log" common
+    SSLEngine on
+    SSLCertificateFile "conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "conf/ssl.key/server.key"
+    <Directory "E:/sites/harbielend/public">
+        Options All
+      AllowOverride All
+      Require all granted
+    </Directory>
+</VirtualHost>
+
+
+<VirtualHost *:80>
+    DocumentRoot "E:/sites/harbielend/public"
+    ServerName harbielend.hot-reload
+    Redirect / https://harbielend.hot-reload/
+  SetEnv APP_ENV hot-reload
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/harbielend.hot-reload-error.log"
+    CustomLog "logs/harbielend.hot-reload-access.log" common
+    <Directory "E:/sites/harbielend/public">
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+    DocumentRoot "E:/sites/harbielend/public"
+    ServerName harbielend.hot-reload
+  SetEnv APP_ENV hot-reload
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/harbielend.hot-reload-https-error.log"
+    CustomLog "logs/harbielend.hot-reload-https-access.log" common
+    SSLEngine on
+    SSLCertificateFile "conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "conf/ssl.key/server.key"
+    <Directory "E:/sites/harbielend/public">
+        Options All
+      AllowOverride All
+      Require all granted
+    </Directory>
+</VirtualHost>
+

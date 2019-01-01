@@ -1,11 +1,11 @@
 <VirtualHost *:80>
     DocumentRoot "E:/sites/huenits/public"
     ServerName huenits.local
-    Redirect / https://huenits.local/
+    # Redirect / https://huenits.local/
   SetEnv APP_ENV local
   SetEnv BLOOM_SERVER vagrant@127.0.0.1
     ErrorLog "logs/huenits.local-error.log"
-    CustomLog "logs/huenits-access.log" common
+    CustomLog "logs/huenits.local-access.log" common
     <Directory "E:/sites/huenits/public">
         AllowOverride All
         Order Allow,Deny
@@ -17,8 +17,8 @@
     ServerName huenits.local
   SetEnv APP_ENV local
   SetEnv BLOOM_SERVER vagrant@127.0.0.1
-    ErrorLog "logs/huenits-https-error.log"
-    CustomLog "logs/huenits-https-access.log" common
+    ErrorLog "logs/huenits.local-https-error.log"
+    CustomLog "logs/huenits.local-https-access.log" common
     SSLEngine on
     SSLCertificateFile "conf/ssl.crt/server.crt"
     SSLCertificateKeyFile "conf/ssl.key/server.key"
@@ -28,3 +28,36 @@
       Require all granted
     </Directory>
 </VirtualHost>
+
+
+<VirtualHost *:80>
+    DocumentRoot "E:/sites/huenits/public"
+    ServerName huenits.hot-reload
+    Redirect / https://huenits.hot-reload/
+  SetEnv APP_ENV hot-reload
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/huenits.hot-reload-error.log"
+    CustomLog "logs/huenits.hot-reload-access.log" common
+    <Directory "E:/sites/huenits/public">
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+    DocumentRoot "E:/sites/huenits/public"
+    ServerName huenits.hot-reload
+  SetEnv APP_ENV hot-reload
+  SetEnv BLOOM_SERVER vagrant@127.0.0.1
+    ErrorLog "logs/huenits.hot-reload-https-error.log"
+    CustomLog "logs/huenits.hot-reload-https-access.log" common
+    SSLEngine on
+    SSLCertificateFile "conf/ssl.crt/server.crt"
+    SSLCertificateKeyFile "conf/ssl.key/server.key"
+    <Directory "E:/sites/huenits/public">
+        Options All
+      AllowOverride All
+      Require all granted
+    </Directory>
+</VirtualHost>
+
