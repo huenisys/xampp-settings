@@ -1,30 +1,27 @@
 <VirtualHost *:80>
-    DocumentRoot "E:/sites/serene/public"
-    ServerName serene.local
-    Redirect / https://serene.local/
+  DocumentRoot "E:/sites/serene/public"
+  ServerName serene.local
   SetEnv APP_ENV local
-  SetEnv BLOOM_SERVER vagrant@127.0.0.1
-    ErrorLog "logs/serene.local-error.log"
-    CustomLog "logs/serene-access.log" common
-    <Directory "E:/sites/serene/public">
-        AllowOverride All
-        Order Allow,Deny
-        Allow from All
-    </Directory>
+  ErrorLog "logs/serene.local-error.log"
+  CustomLog "logs/serene.local-access.log" common
+  <Directory "E:/sites/serene/public">
+    AllowOverride All
+    Order Allow,Deny
+    Allow from All
+  </Directory>
 </VirtualHost>
 <VirtualHost *:443>
-    DocumentRoot "E:/sites/serene/public"
-    ServerName serene.local
+  DocumentRoot "E:/sites/serene/public"
+  ServerName serene.local
   SetEnv APP_ENV local
-  SetEnv BLOOM_SERVER vagrant@127.0.0.1
-    ErrorLog "logs/serene-https-error.log"
-    CustomLog "logs/serene-https-access.log" common
-    SSLEngine on
-    SSLCertificateFile "conf/ssl.crt/server.crt"
-    SSLCertificateKeyFile "conf/ssl.key/server.key"
-    <Directory "E:/sites/serene/public">
-        Options All
-      AllowOverride All
-      Require all granted
-    </Directory>
+  ErrorLog "logs/serene.local-https-error.log"
+  CustomLog "logs/serene.local-https-access.log" common
+  SSLEngine on
+  SSLCertificateFile "conf/ssl.crt/server.crt"
+  SSLCertificateKeyFile "conf/ssl.key/server.key"
+  <Directory "E:/sites/serene/public">
+    Options All
+    AllowOverride All
+    Require all granted
+  </Directory>
 </VirtualHost>
