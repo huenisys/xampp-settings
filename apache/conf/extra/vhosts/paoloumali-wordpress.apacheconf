@@ -1,0 +1,27 @@
+<VirtualHost *:80>
+  DocumentRoot "E:/sites/paoloumali-wordpress"
+  ServerName paoloumali-wordpress.local
+  SetEnv APP_ENV local
+  ErrorLog "logs/paoloumali-wordpress.local-error.log"
+  CustomLog "logs/paoloumali-wordpress.local-access.log" common
+  <Directory "E:/sites/paoloumali-wordpress">
+    AllowOverride All
+    Order Allow,Deny
+    Allow from All
+  </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+  DocumentRoot "E:/sites/paoloumali-wordpress"
+  ServerName paoloumali-wordpress.local
+  SetEnv APP_ENV local
+  ErrorLog "logs/paoloumali-wordpress.local-https-error.log"
+  CustomLog "logs/paoloumali-wordpress.local-https-access.log" common
+  SSLEngine on
+  SSLCertificateFile "conf/ssl.crt/server.crt"
+  SSLCertificateKeyFile "conf/ssl.key/server.key"
+  <Directory "E:/sites/paoloumali-wordpress">
+    Options All
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>

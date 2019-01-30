@@ -25,3 +25,31 @@
     Require all granted
   </Directory>
 </VirtualHost>
+
+<VirtualHost *:80>
+  DocumentRoot "E:/sites/bloom/public"
+  ServerName bloom.hot
+  SetEnv APP_ENV hot
+  ErrorLog "logs/bloom.hot-error.log"
+  CustomLog "logs/bloom.hot-access.log" common
+  <Directory "E:/sites/bloom/public">
+    AllowOverride All
+    Order Allow,Deny
+    Allow from All
+  </Directory>
+</VirtualHost>
+<VirtualHost *:443>
+  DocumentRoot "E:/sites/bloom/public"
+  ServerName bloom.hot
+  SetEnv APP_ENV hot
+  ErrorLog "logs/bloom.hot-https-error.log"
+  CustomLog "logs/bloom.hot-https-access.log" common
+  SSLEngine on
+  SSLCertificateFile "conf/ssl.crt/server.crt"
+  SSLCertificateKeyFile "conf/ssl.key/server.key"
+  <Directory "E:/sites/bloom/public">
+    Options All
+    AllowOverride All
+    Require all granted
+  </Directory>
+</VirtualHost>
